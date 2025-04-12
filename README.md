@@ -41,29 +41,7 @@ Create a database and use sql file in repo
 Update config.ini with your MySQL credentials and secret key.
 4. **python app.py**
 
-5. **repo structure**
-├── app.py
-├── config.ini
-├── structure_service.py
-├── evaluation_service.py
-├── feedback_service.py
-├── requirements.txt
-├── schema.sql
-├── templates/
-│   ├── auth/
-│   │   ├── login.html
-│   │   └── register.html
-│   ├── admin/
-│   │   ├── dashboard.html
-│   │   └── admin_previous_work.html
-│   └── user/
-│       ├── dashboard.html
-│       └── submitessay.html
-├── static/
-│   ├── styles.css
-│   ├── admin.css
-│   ├── admin_previous.css
-│   └── script.js
+
 
 
 ![Structure_Eng](https://github.com/user-attachments/assets/60b0a0e0-6f46-41db-9cad-a39edd7cf460)
