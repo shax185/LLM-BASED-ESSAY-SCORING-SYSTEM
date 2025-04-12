@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Submit Essay</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <div class="sidebar user-sidebar">
+        <div class="profile-box">
+            <h2>{{ session['username'] }}</h2>
+        </div>
+        <div class="sidebar-links">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/history">📚 Essay History</a>
+            <a href="/logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>✍️ Write Essay on: <span style="color: #4DA8DA">{{ rubric.topic }}</span></h1>
+        <p><strong>Difficulty:</strong> {{ rubric.difficulty_level }}</p>
+
+        <div class="rubric-readable">
+            <h2>📌 Essay Structure</h2>
+            {% for section, content in structure.items() %}
+                <h3>🔹 {{ section }} ({{ content.weight }}%)</h3>
+
+                {% if content.details %}
+                    <ul>
+                        {% for detail in content.details %}
+                            <li>{{ detail }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+
+                {% if content.arguments %}
+                    <h4>Arguments:</h4>
+                    <ul>
+                        {% for arg in content.arguments %}
+                            <li>
+                                <strong>{{ arg.name }} ({{ arg.weight }}%)</strong>
+                                <ul>
+                                    {% for detail in arg.details %}
+                                        <li>{{ detail }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Essay Submission -->
+        <form method="POST">
+            <label for="essay">📝 Your Essay:</label>
+            <textarea id="essay" name="essay" rows="15" required placeholder="Write your essay here..."></textarea>
+            <button type="submit" class="write-btn">🚀 Submit Essay</button>
+        </form>
+
+        <!-- Evaluation Result -->
+        {% if feedback %}
+        <div class="feedback-box">
+            <h2>📊 Scores</h2>
+            <ul>
+                {% for section, data in feedback.scores.section_scores.items() %}
+                    <li><strong>{{ section }}:</strong> {{ data.score }}%</li>
+                {% endfor %}
+            </ul>
+            <p><strong>✅ Total Score:</strong> {{ feedback.scores.total_score }}%</p>
+
+            <h3>🗣️ Feedback</h3>
+            <ul>
+                {% for section, text in feedback.text.items() %}
+                    <li><strong>{{ section }}:</strong> {{ text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

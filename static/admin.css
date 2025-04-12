@@ -1,0 +1,187 @@
+/* === Reset & Base === */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #121212;
+    color: #fff;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.admin-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* === Sidebar === */
+.sidebar {
+    width: 250px;
+    background: #1d1d2f;
+    padding: 30px 20px;
+    border-right: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    border: 3px solid #4DA8DA;
+}
+
+.sidebar h2 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    text-align: center;
+    color: #4DA8DA;
+}
+
+.sidebar a {
+    color: #ccc;
+    text-decoration: none;
+    margin-top: 20px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.sidebar a:hover {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* === Main Content Grid === */
+.main-content {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 25px;
+    overflow-y: auto;
+}
+
+form, .feedback-box {
+    background-color: #1e1e2e;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #4DA8DA;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+textarea, input, select {
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 6px;
+    background: #2f2f3f;
+    color: #fff;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    background-color: #373757;
+    box-shadow: 0 0 5px rgba(77, 168, 218, 0.5);
+}
+
+/* === Buttons === */
+button {
+    padding: 12px;
+    border: none;
+    background: linear-gradient(135deg, #4DA8DA, #3A8DFF);
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.01);
+}
+
+/* === Labels & Headings === */
+label {
+    font-size: 0.85rem;
+    color: #ccc;
+}
+
+h2 {
+    grid-column: span 2;
+    color: #4DA8DA;
+    font-size: 1.4rem;
+    margin-top: 0;
+}
+
+/* === Feedback Box === */
+.feedback-box {
+    grid-column: span 2;
+    white-space: pre-wrap;
+    background: #1a1a26;
+    border: 1px solid #444;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #ddd;
+}
+
+.structure-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 30px;
+    gap: 20px;
+}
+
+.structure-box {
+    flex: 1 1 30%;
+    display: flex;
+    flex-direction: column;
+    background: #1E1E2E;
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 3px solid #4DA8DA;
+    min-height: 350px;
+}
+
+.structure-box label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4DA8DA;
+    margin-bottom: 10px;
+}
+
+.structure-box textarea {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 12px;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    resize: vertical;
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .main-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+#finalize-status {
+    margin-top: 10px;
+    color: #4DA8DA;
+    font-size: 0.9rem;
+}
+
+.structure-box textarea {
+    overflow-y: auto;
+}

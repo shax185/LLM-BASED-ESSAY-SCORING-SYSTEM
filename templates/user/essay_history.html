@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Essay History</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="dashboard-container">
+    <div class="sidebar user-sidebar">
+        <div class="profile-box">
+            <h2>{{ session['username'] }}</h2>
+        </div>
+        <div class="sidebar-links">
+            <a href="/dashboard">🏠 Dashboard</a>
+            <a href="/logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <h1>📚 Your Essay History</h1>
+
+        {% if submissions %}
+            <div class="essay-history">
+                {% for s in submissions %}
+                    <div class="essaycard">
+                        <h2>📝 {{ s.topic }}</h2>
+                        <p><strong>Difficulty:</strong> {{ s.difficulty_level }}</p>
+                        <p><strong>Submitted on:</strong> {{ s.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+                        <p><strong>Total Score:</strong> {{ s.final_score }}%</p>
+
+                        <h3>Scores</h3>
+                        <ul>
+                            <li><strong>Content:</strong> {{ s.content_score }}%</li>
+                            <li><strong>Grammar:</strong> {{ s.grammar_score }}%</li>
+                            <li><strong>Structure:</strong> {{ s.structure_score }}%</li>
+                            <li><strong>Conclusion:</strong> {{ s.conclusion_score }}%</li>
+                        </ul>
+
+                        <h3>🗣️ Feedback</h3>
+                        <ul>
+                            {% for key, val in s.feedback.items() %}
+                                <li><strong>{{ key.replace('_', ' ').title() }}:</strong> {{ val }}</li>
+                            {% endfor %}
+                        </ul>
+
+                        <details>
+                            <summary>📄 View Submitted Essay</summary>
+                            <p>{{ s.essay }}</p>
+                        </details>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No essays submitted yet.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

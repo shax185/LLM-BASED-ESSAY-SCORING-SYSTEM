@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Previous Work</title>
+    <link rel="stylesheet" href="/static/admin_previous.css">
+</head>
+<body>
+<div class="admin-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="profile-box">
+            <h2>{{ session['username'] }}</h2>
+        </div>
+        <div class="sidebar-links">
+            <a href="/admin_dashboard">🏠 Dashboard</a>
+            <a href="/logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>📚 Finalized Rubrics</h1>
+
+        {% if rubrics %}
+            {% for rubric in rubrics %}
+                <div class="rubric-card">
+                    <h2>📌 {{ rubric.topic }}</h2>
+                    <p><strong>💡 Difficulty:</strong> {{ rubric.difficulty_level }}</p>
+                    <p><strong>🗓️ Created At:</strong> {{ rubric.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+                    <div class="rubric-structure">
+                        {% for section, content in rubric.parsed_structure.items() %}
+                            <h3>🔹 {{ section }} ({{ content.weight }}%)</h3>
+                    
+                            {% if content.details %}
+                                <ul>
+                                    {% for detail in content.details %}
+                                        <li>{{ detail }}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                    
+                            {% if content.arguments %}
+                                <h4>Arguments:</h4>
+                                <ul>
+                                    {% for arg in content.arguments %}
+                                        <li>
+                                            <strong>{{ arg.name }} ({{ arg.weight }}%)</strong>
+                                            <ul>
+                                                {% for detail in arg.details %}
+                                                    <li>{{ detail }}</li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No rubrics found.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

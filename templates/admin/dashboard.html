@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="/static/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="profile-section">
+                <h3>{{ session['username'] }}</h3>
+                <p><a href="/admin_previous_work">Previous Work</a></p>
+                <p><a href="/logout">Logout</a></p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Rubric Creation -->
+            <form id="structure-form" onsubmit="event.preventDefault();">
+                <label for="topic">Essay Topic:</label>
+                <input type="text" id="topic" name="topic" placeholder="Enter topic" required>
+
+                <label for="difficulty">Difficulty Level:</label>
+                <select id="difficulty" name="difficulty">
+                    <option value="Easy">Easy</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Hard">Hard</option>
+                </select>
+
+                <button type="button" id="generate-btn">Generate Structure</button>
+
+                <!-- Readable Markdown Preview -->
+                <div class="structure-box" style="margin-top: 20px;">
+                    <label for="final-structure-markdown">Final Structure (Readable Format)</label>
+                    <textarea id="final-structure-markdown" readonly></textarea>
+                </div>
+            </form>
+
+            <div class="structure-section">
+                <div class="structure-box">
+                    <label for="structure-json">First Structure (Auto-generated)</label>
+                    <textarea id="structure-json" readonly></textarea>
+                </div>
+            
+                <div class="structure-box">
+                    <label for="edit-structure">Suggested Edits (Optional)</label>
+                    <textarea id="edit-structure" placeholder="Suggest minor tweaks..."></textarea>
+                    <button type="button" id="make-edit-btn" style="margin-top: 8px;">✏️ Make Edit</button>
+                </div>
+
+                <div class="structure-box">
+                    <label for="final-structure">Edited Structure (Final version saved to DB)</label>
+                    <textarea id="final-structure" placeholder="Paste or edit final structure here..."></textarea>
+                </div>
+            </div>
+
+            <!-- Finalization -->
+            <div class="bottom-section">
+                <button id="finalize-structure">Finalize Structure</button>
+                <div id="finalize-status"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

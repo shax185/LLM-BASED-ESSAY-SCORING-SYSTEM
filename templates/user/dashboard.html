@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="dashboard-container">
+    <!-- Left Sidebar -->
+    <div class="sidebar user-sidebar">
+        <div class="profile-box">
+            <h2>{{ session['username'] }}</h2>
+        </div>
+        <div class="sidebar-links">
+            <a href="/history">📚 Essay History</a>
+            <a href="/logout">🚪 Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>📝 Available Essay Topics</h1>
+
+        {% if topics %}
+            <div class="topic-grid">
+                {% for topic in topics %}
+                    <div class="topic-card">
+                        <h3>{{ topic.topic }}</h3>
+                        <p><strong>Admin:</strong> {{ topic.created_by }}</p>
+                        <p><strong>Difficulty:</strong> {{ topic.difficulty_level }}</p>
+                        {% if topic.requirements %}
+                            <div class="markdown-content">{{ topic.requirements | safe }}</div>
+                        {% endif %}
+                        <a href="/submit_essay/{{ topic.id }}" class="write-btn">✍️ Write Essay</a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-topics-msg">No topics available at the moment.</p>
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>
